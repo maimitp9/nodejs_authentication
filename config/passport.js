@@ -13,6 +13,7 @@ module.exports = (passport) => {
   // opts.audience = 'yoursite.net';
 
   passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+      console.log(jwt_payload._doc)
     User.getUserById(jwt_payload._doc._id, function(err, user) {
         if (err) {
             return done(err, false);

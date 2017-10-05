@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var mongoDB = 'mongodb://127.0.0.1/authDB';
-mongoose.connect(mongoDB, {urlMongoClient: true})
+mongoose.connect(mongoDB, {useMongoClient: true})
 
 mongoose.Promise = global.Promise;
 

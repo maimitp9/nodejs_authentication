@@ -16,15 +16,16 @@ var userSchema = new Schema({
 
 var User = module.exports = mongoose.model('User', userSchema);
 
-module.exports.getUserById = (id, callback) => {
-  User.findById(id, callback)
+module.exports.getUserById = (user_id, callback) => {
+  User.findOne({id: user_id}, callback)
 }
 
 module.exports.getUserByEmail = (email, callback) => {
   User.findOne({email: email}, callback);
 }
 
-module.exports.createUser = (newUser, callback) => {
+module.exports.create = (newUser, callback) => {
+  var newUser = new User(newUser);
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(newUser.password, salt, (err, hash) => {
       if(err) throw err;

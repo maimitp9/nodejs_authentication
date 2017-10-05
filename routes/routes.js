@@ -1,24 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-var User = require('../models/user');
+var jwt = require('jsonwebtoken');
+var User = require('../controllers/usersController');
 
 module.exports = (router, passport) => {
   router.get("/", (req, res) => {
     res.status(200).send("Welcome to my site...")
   })
 
-  router.post("/signup", (req, res) => {
-    var newUser = new User({
-      email: req.body.email,
-      password: req.body.password
-    })
-    User.createUser(newUser, (err, user) => {
-      if(err){
-        res.status(400).send({success: false, message: "User not registered"})
-      }else{
-        res.status(200).send({success: false, message: "User registered"})        
-      }
-    })
-  })
+  router.post("/signup", User.createUser)
+  router.post("/login", User.login)
+  router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res) => {
+    res.status(200).send({ success: true, user: user.req })
+  });
+
 }
