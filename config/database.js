@@ -9,5 +9,5 @@ var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, "error to connect mongo db"));
 
-var secret = "Maimit";
+var secret = "maimit";
 module.exports = {db, secret};

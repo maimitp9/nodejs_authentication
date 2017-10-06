@@ -17,7 +17,8 @@ var userSchema = new Schema({
 var User = module.exports = mongoose.model('User', userSchema);
 
 module.exports.getUserById = (user_id, callback) => {
-  User.findOne({id: user_id}, callback)
+  console.log("hello I am maimit")
+  User.findById(user_id, callback)
 }
 
 module.exports.getUserByEmail = (email, callback) => {

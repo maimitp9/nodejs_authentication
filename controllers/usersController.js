@@ -20,11 +20,11 @@ module.exports.login = (req, res) => {
     User.comparePassword(req.body.password, user.password, (err, isMatch) => {
       if(err) throw err;
       if(isMatch){
-        var token = jwt.sign({ user: user }, secret);
+        var token = jwt.sign({id: user._id}, secret);
         res.status(200).send({ success: true, token: "JWT "+ token, user:{ id: user._id, email: user.email } })
       }else{
         res.status(400).send({ success: false, message: "Password doesn't match..." })
       }
     })
-  })
+  }) 
 }

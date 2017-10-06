@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var cors = require('cors');
 
-var {db} = require('./config/database')
+var {db, secret} = require('./config/database')
 
 var port = process.env.PORT || 3000;
 

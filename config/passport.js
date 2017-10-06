@@ -7,14 +7,14 @@ var {secret} = require('./database')
 module.exports = (passport) => {
   
   var opts = {}
-  opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+  opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
   opts.secretOrKey = secret;
   // opts.issuer = 'accounts.examplesoft.com';
   // opts.audience = 'yoursite.net';
 
   passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-      console.log(jwt_payload._doc)
-    User.getUserById(jwt_payload._doc._id, function(err, user) {
+      console.log(jwt_payload.id)
+    User.getUserById(jwt_payload.id, function(err, user) {
         if (err) {
             return done(err, false);
         }
